@@ -1,0 +1,7 @@
+Algoritmo "atribuicao"
+
+inicio
+
+var a: inteiro
+
+fimalgoritmo

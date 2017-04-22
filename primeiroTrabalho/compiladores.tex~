@@ -1,0 +1,409 @@
+\documentclass[12pt,a4paper,twoside]{report}
+% -------------------------------------------------------------------- %
+% Pacotes
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[brazil]{babel}
+\usepackage[fixlanguage]{babelbib}
+\usepackage[pdftex]{graphicx}      % usamos arquivos pdf/png como figuras
+\usepackage{setspace}              % espaçamento flexvel
+\usepackage{indentfirst}           % indentação do primeiro parágrafo
+\usepackage{makeidx}               % índice remissivo
+\usepackage[nottoc]{tocbibind}     % acrescentamos a bibliografia/indice/conteudo no Table of Contents
+\usepackage{courier}               % usa o Adobe Courier no lugar de Computer Modern Typewriter
+\usepackage{type1cm}               % fontes realmente escaláveis
+\usepackage{titletoc}
+\usepackage{ucs}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+\usepackage[usenames,svgnames,dvipsnames]{xcolor}
+\usepackage[a4paper,top=2.54cm,bottom=2.0cm,left=2.0cm,right=2.54cm]{geometry} % margens
+\usepackage{amsmath} 
+
+\usepackage[pdftex,plainpages=false,pdfpagelabels,pagebackref,colorlinks=true,citecolor=DarkGreen,
+linkcolor=NavyBlue,urlcolor=DarkRed,filecolor=green,bookmarksopen=true]{hyperref} % links coloridos
+\usepackage[all]{hypcap}                % soluciona o problema com o hyperref e capítulos
+\usepackage[square,sort,nonamebreak,comma]{natbib}  % citação bibliográfica alpha
+\fontsize{60}{62}\usefont{OT1}{cmr}{m}{n}{\selectfont}
+\usepackage{upquote}                    % formata apóstrofes '
+\usepackage{textcomp}
+
+% Para formatar corretamente as URLs
+\usepackage{url}
+% -------------------------------------------------------------------- %
+% Cabeçalhos similares ao TAOCP de Donald E. Knuth
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}
+\renewcommand{\headrulewidth}{0pt}
+
+% -------------------------------------------------------------------- %
+\graphicspath{{./imagens/}}        % caminho das figuras
+\frenchspacing                     % arruma o espaço: id est (i.e.) e exempli gratia (e.g.)
+\urlstyle{same}                    % URL com o mesmo estilo do texto e no mono-spaced
+\makeindex                         % para o índice remissivo
+\raggedbottom                      % para no permitir espaços extras no texto
+\fontsize{60}{62}\usefont{OT1}{cmr}{m}{n}{\selectfont}
+\cleardoublepage
+\normalsize
+
+% -------------------------------------------------------------------- %
+% Cores para formatação de código
+\usepackage{color}
+\definecolor{vermelho}{rgb}{0.6,0,0} % para strings
+\definecolor{verde}{rgb}{0.25,0.5,0.35} % para comentários
+\definecolor{roxo}{rgb}{0.5,0,0.35} % para palavras-chaves
+\definecolor{azul}{rgb}{0.25,0.35,0.75} % para strings
+\definecolor{cinza-claro}{gray}{0.95}
+% -------------------------------------------------------------------- %
+% Opções de listagem usados para o código fonte
+% Ref: http://en.wikibooks.org/wiki/LaTeX/Packages/Listings
+
+
+
+\usepackage{listings}           % para formatar código-fonte (ex. em Java)
+
+
+\lstset{ %
+language=[Objective]Caml,  % seleciona a linguagem do código (aqui em lstlang0.sty
+basicstyle=\footnotesize\ttfamily, % o tamanho da fonte usado no código
+commentstyle=\color{verde}\bfseries,  % formatação de comentários
+stringstyle=\color{azul},    % formatação de strings
+upquote=true,
+numbers=left,                   % onde colocar os números de linha
+numberstyle=\tiny,  % o tamanho da fonte usada para a numeração das linhas
+stepnumber=1,                   % o intervalo entre dois números de linhas. Se for 1, numera cada uma.
+numbersep=5pt,                  % how far the line-numbers are from the code
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+keywordstyle=\color{roxo}\bfseries,
+keywordstyle=[1]\color{roxo}\bfseries,
+keywordstyle=[2]\color{verde}\bfseries,
+%        keywordstyle=[3]\textbf,    %
+%        keywordstyle=[4]\textbf,   \sqrt{\sqrt{}} %
+frame=b,                   % adds a frame around the code
+framerule=0.6pt,
+tabsize=2,                      % sets default tabsize to 2 spaces
+captionpos=t,                   % sets the caption-position to top
+breaklines=true,                % sets automatic line breaking
+breakatwhitespace=false,        % sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)},         % if you want to add a comment within your code
+backgroundcolor=\color[rgb]{1.0,1.0,1.0}, % choose the background color.
+rulecolor=\color[rgb]{0.8,0.8,0.8},
+extendedchars=true,
+xleftmargin=10pt,
+xrightmargin=10pt,
+framexleftmargin=10pt,
+framexrightmargin=10pt,
+literate={â}{{\^{a}}}1  % para formatar corretamente os acentos do Português ao usar utf8
+    {ê}{{\^{e}}}1
+    {ô}{{\^{o}}}1  
+    {Â}{{\^{A}}}1
+    {Ê}{{\^{E}}}1
+    {Ô}{{\^{O}}}1
+    {á}{{\'{a}}}1
+    {é}{{\'{e}}}1
+    {í}{{\'{i}}}1
+    {ó}{{\'{o}}}1
+    {ú}{{\'{u}}}1
+    {Á}{{\'{A}}}1
+    {É}{{\'{E}}}1
+    {Í}{{\'{I}}}1
+    {Ó}{{\'{O}}}1
+    {Ú}{{\'{U}}}1
+    {à}{{\`{a}}}1
+    {À}{{\`{A}}}1
+    {ã}{{\~{a}}}1
+    {õ}{{\~{o}}}1
+    {Ã}{{\~{A}}}1
+    {Õ}{{\~{O}}}1
+    {ç}{{\c{c}}}1
+    {Ç}{{\c{C}}}1
+    {ü}{{\"u}}1
+    {Ü}{{\"U}}1
+}
+
+\renewcommand{\lstlistingname}{Listagem}
+\renewcommand{\lstlistlistingname}{Lista de Listagens}
+
+% Definição de novos estilos
+\lstdefinestyle{Bash}
+    {language=bash,frame=single,numbers=none,basicstyle=\footnotesize\ttfamily,
+     morekeywords={cp,mkdir,sudo,tar}}
+
+% Definição de novos ambientes
+\lstnewenvironment{terminal}
+  {\lstset{style=Bash}}
+  {}
+
+\lstnewenvironment{ocaml}
+  {\lstset{basicstyle=\scriptsize\ttfamily,
+           frame=single,
+           frameround=tttt,
+           framerule=2pt,
+           numbers=none,
+           rulecolor=\color{Salmon}}}
+  {}
+
+\lstnewenvironment{xml}
+   {\lstset{language=XML,frame=single,numbers=none}}
+   {}
+
+\lstnewenvironment{interprete}
+  {\lstset{frame=single,
+            frameround=tttt,
+            numbers=none,
+            basicstyle=\ttfamily,
+            framerule=2pt,
+            rulecolor=\color{CadetBlue}}}
+  {}
+% Formata o caption da listagem
+% \DeclareCaptionFont{blue}{\color{blue}} 
+
+% \captionsetup[lstlisting]{singlelinecheck=false, labelfont={blue}, textfont={blue}}
+\usepackage{caption}
+\DeclareCaptionFont{white}{\color{white}}
+\DeclareCaptionFormat{listing}{\colorbox[cmyk]{0.43, 0.35, 0.35,0.01}{\parbox{\textwidth}{\hspace{15pt}#1#2#3}}}
+\captionsetup[lstlisting]{format=listing,labelfont=white,textfont=white, singlelinecheck=false, margin=0pt, font={bf,footnotesize}}
+
+\newcommand{\ListingsPath}{./codigos}
+% Inclui o nome do arquivo como Caption 
+\newcommand{\filelisting}[2][]{%
+    \lstinputlisting[caption={\texttt{\detokenize{#2}}},#1]{\ListingsPath/#2}%
+}
+
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+
+\title{Construção de um compilador de Portugol para CLI usando Objective Caml}
+\date{}
+\author{Matheus Meira Roberto \\
+\texttt{\small \url{meira.matheus.rob@gmail.com}}\\
+\vspace{1cm} \\
+Faculdade de Computação \\
+Universidade Federal de Uberlândia
+}
+\date{\today}
+
+%\includeonly{cap-clojure,magical,short}
+\begin{document}
+  \maketitle
+
+% Sumário
+\tableofcontents    
+
+% Capítulos do trabalho
+
+% cabeçalho para as páginas de todos os capítulos
+\fancyhead[RE,LO]{\thesection}
+
+%\singlespacing              % espaçamento simples
+\setlength{\parskip}{0.15in} % espaçamento entre paragráfos
+
+\chapter{Introdução}
+Este relatório esta sendo construido com o objetivo de relatar os novos conhecimentos adquiridos na disciplina de compiladores.
+
+\section{Objetivo}
+O objetivo final é construir um compilador capaz de receber um código \textbf{Portugol} e gerar um \textbf{Assembly} que será executado pelo \textbf{CLR}(commom language runtime).
+
+\section{CLI}
+CLI (Common Intermediate Language) é o código assembly gerado para o CLR executar. Dessa forma, é necessârio instalar as ferramentas necessárias para criar os códigos em CLI e executá-los.
+
+\section{CLR e mono}
+No nosso trabalho, iremos utilizar o sistema operacional linux, sendo o \textbf{Ubuntu 14.04} a distribuição escolhida. Então, devemos instalar o \textbf{mono}. Pois, ele será o responsável por disponibilizar o CLR. O CLR é responsável por gerenciar a executar os programas.
+
+\subsection{Instalando o mono}
+Para instalar o mono é simples. Basta seguir os comando:
+
+\begin{enumerate}
+    \item sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+    \item echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+    \item sudo apt-get update
+    \item sudo apt-get install mono-complete
+\end{enumerate}
+
+
+\section{Conjunto de instruções CLI}
+Dado que nosso objetivo é criar um compilador, é preciso entender melhor as instruçõs do CLI.
+
+\begin{enumerate}
+\item \textbf{add}, Add two values, returning a new value.
+\item \textbf{add.ovf}, Add signed integer values with overflow check.
+\item \textbf{add.ovf.un}, Add unsigned integer values with overflow check.
+\item \textbf{and}, Bitwise AND of two integral values, returns an integral value.
+\item \textbf{arglist}, Return argument list handle for the current method.
+\item \textbf{beq <int32 (target)>}, Branch to target if equal.
+\item \textbf{beq.s <int8 (target)>}, Branch to target if equal, short form.
+\item \textbf{bge <int32 (target)>}, Branch to target if greater than or equal to.
+\item \textbf{bge.s <int8 (target)>}, Branch to target if greater than or equal to, short form.
+\item \textbf{bge.un <int32 (target)>}, Branch to target if greater than or equal to (unsigned or
+unordered).
+\item \textbf{bge.un.s <int8 (target)>}, Branch to target if greater than or equal to (unsigned or
+unordered), short form.
+\item \textbf{bgt <int32 (target)>}, Branch to target if greater than.
+\item \textbf{bgt.s <int8 (target)>}, Branch to target if greater than, short form.
+\item \textbf{bgt.un <int32 (target)>}, Branch to target if greater than (unsigned or unordered).
+\item \textbf{bgt.un.s <int8 (target)>}, Branch to target if greater than (unsigned or unordered),
+short form.
+
+\item \textbf{ble <int32 (target)>}, Branch to target if less than or equal to.
+\item \textbf{ble.s <int8 (target)>}, Branch to target if less than or equal to, short form.
+\item \textbf{ble.un <int32 (target)>}, Branch to target if less than or equal to (unsigned or
+unordered).
+\item \textbf{ble.un.s <int8 (target)>}, Branch to target if less than or equal to (unsigned or
+unordered), short form.
+\item \textbf{blt <int32 (target)>}, Branch to target if less than.
+\item \textbf{blt.s <int8 (target)>}, Branch to target if less than, short form.
+\item \textbf{blt.un <int32 (target)>}, Branch to target if less than (unsigned or unordered).
+\item \textbf{blt.un.s <int8 (target)>}, Branch to target if less than (unsigned or unordered),
+short form.
+\item \textbf{bne.un <int32 (target)>}, Branch to target if unequal or unordered.
+\item \textbf{bne.un.s <int8 (target)>}, Branch to target if unequal or unordered, short form.
+\item \textbf{box <typeTok>}, Convert a boxable value to its boxed form.
+\item \textbf{br <int32 (target)>}, Branch to target.
+\item \textbf{br.s <int8 (target)>}, Branch to target, short form.
+\item \textbf{break}, Inform a debugger that a breakpoint has been reached.
+\item \textbf{brfalse <int32 (target)>}, Branch to target if value is zero (false).
+\item \textbf{brfalse.s <int8 (target)>}, Branch to target if value is zero (false), short form.
+\item \textbf{brinst <int32 (target)>}, Branch to target if value is a non-null object reference
+(alias for brtrue).
+\item \textbf{brinst.s <int8 (target)>}, Branch to target if value is a non-null object reference,
+short form (alias for brtrue.s).
+\item \textbf{brnull <int32 (target)>}, Branch to target if value is null (alias for brfalse).
+\item \textbf{brnull.s <int8 (target)>}, Branch to target if value is null (alias for brfalse.s), short form.
+\item \textbf{brtrue <int32 (target)>}, Branch to target if value is non-zero (true).
+\item \textbf{brtrue.s <int8 (target)>}, Branch to target if value is non-zero (true), short form.
+\item \textbf{brzero <int32 (target)>}, Branch to target if value is zero (alias for brfalse).
+\item \textbf{brzero.s <int8 (target)>}, Branch to target if value is zero (alias for brfalse.s), short form.
+\item \textbf{call <method>}, Call method described by method.
+\item \textbf{calli <callsitedescr>}, Call method indicated on the stack with arguments descri-
+bed by callsitedescr.
+
+\item \textbf{callvirt <method>}, Call a method associated with an object.
+\item \textbf{castclass <class>}, Cast obj to class.
+\item \textbf{ceq}, Push 1 (of type int32) if value1 equals value2, else push 0.
+\item \textbf{cgt}, Push 1 (of type int32) if value1 > value2, else push 0.
+\item \textbf{cgt.un}, Push 1 (of type int32) if value1 > value2, unsigned or unordered, else
+push 0.
+\item \textbf{ckfinite}, Throw ArithmeticException if value is not a finite number.
+\item \textbf{clt}, Push 1 (of type int32) if value1 < value2, else push 0.
+\item \textbf{clt.un}, Push 1 (of type int32) if value1 < value2, unsigned or unordered, else push
+0.
+\item \textbf{constrained. <thisType>}, Call a virtual method on a type constrained to be type
+T.
+\item \textbf{conv.i}, Convert to native int, pushing native int on stack.
+\item \textbf{conv.i1}, Convert to int8, pushing int32 on stack.
+\item \textbf{conv.i2}, Convert to int16, pushing int32 on stack.
+\item \textbf{conv.i4}, Convert to int32, pushing int32 on stack.
+\item \textbf{conv.i8,}, Convert to int64, pushing int64 on stack.
+\item \textbf{conv.ovf.i}, Convert to a native int (on the stack as native int) and throw an ex-
+ception on overflow.
+
+\end{enumerate}
+
+\section{Primeiro programa em CIL}
+Para começarmos o projeto vamos compilar um código em cSharp e desassemblar para verificar o CLI gerado.
+
+\begin{verbatim}
+using System;
+
+class HelloWorld {
+  static void Main() {
+    Console.WriteLine("Hello World");
+  }
+}
+\end{verbatim}
+
+Inicialmente, utilizamos um comando para gerar um executável:
+
+\begin{terminal}
+> mcs nomeDoArquivo.cs
+\end{terminal}
+
+Agora, para desassemblar o executável vamos utilizar um outro comando:
+
+\begin{terminal}
+> monodis nomeDoArquivo.exe
+\end{terminal}
+
+Dessa forma, conseguimos obter o seguinte código CLI:
+
+\begin{verbatim}
+.class private auto ansi beforefieldinit HelloWorld
+  	extends [mscorlib]System.Object
+  {
+
+    // method line 1
+    .method public hidebysig specialname rtspecialname 
+           instance default void '.ctor' ()  cil managed 
+    {
+        // Method begins at RVA 0x2050
+	// Code size 7 (0x7)
+	.maxstack 8
+	IL_0000:  ldarg.0 
+	IL_0001:  call instance void object::'.ctor'()
+	IL_0006:  ret 
+    } // end of method HelloWorld::.ctor
+
+    // method line 2
+    .method private static hidebysig 
+           default void Main ()  cil managed 
+    {
+        // Method begins at RVA 0x2058
+	.entrypoint
+	// Code size 11 (0xb)
+	.maxstack 8
+	IL_0000:  ldstr "Hello World"
+	IL_0005:  call void class [mscorlib]System.Console::WriteLine(string)
+	IL_000a:  ret 
+    } // end of method HelloWorld::Main
+
+  } // end of class HelloWorld
+\end{verbatim}
+
+Como acabamos de gerar por comando o CLI, ele gera esse código que possui uma refência as linhas de onde cada comando esta no arquivo cSharp. De maneira mais organizada teríamos o seguinte código:
+
+\begin{lstlisting}
+.assembly Hello {}
+.assembly extern mscorlib {}
+.method static void Main()
+{
+
+	.entrypoint
+
+	.maxstack 1
+
+	ldstr "Hello, world!"
+
+	call void [mscorlib]System.Console::WriteLine(string)
+
+	ret
+
+}
+\end{lstlisting}
+
+Na primeira linha temos o nome da classe:
+
+\begin{terminal}
+> .assembly Hello {}
+\end{terminal}
+
+Na segunda ocorre a importação da biblioteca mscorlib, que será a responsável pela impressão na tela:
+
+\begin{terminal}
+> .assembly extern mscorlib {}
+\end{terminal}
+
+E na terceira, temos a definição do método main
+
+\begin{terminal}
+> .method static void Main()
+\end{terminal}
+
+
+
+\end{document} 

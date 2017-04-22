@@ -1,0 +1,56 @@
+\documentclass{article}
+\title{Cartesian closed categories and the price of eggs}
+\author{Jane Doe}
+\date{September 1994}
+\begin{document}
+   \maketitle
+\chapter{Introdução}
+
+\section{Introdu\c{c}\~ao}
+Este relatório esta sendo construido com o objetivo de relatar os novos conhecimentos adquiridos na disciplina de compiladores.
+
+\section{Objetivo}
+O objetivo final \'e construir um compilador capaz de receber um c\'odigo \textbf{Portugol} e gerar um \textbf{Assembly} que ser\'a executado pelo \textbf{CLR}(commom language runtime).
+
+\section{CLI}
+CLI (Common Intermediate Language) \'e o c\'odigo assembly gerado para o CLR executar. Dessa forma, \'e necess\^ario instalar as ferramentas necess\'arias para criar os c\'odigos em CLI e execut\'a-los.
+
+\section{CLR e mono}
+No nosso trabalho, iremos utilizar o sistema operacional linux, sendo o \textbf{Ubuntu 14.04} a distribui\c{c}\~ao escolhida. Ent\~ao, devemos instalar o \textbf{mono}. Pois, ele ser\'a o respons\'avel por disponibilizar o CLR. O CLR \'e respons\'avel por gerenciar a execu\c{c}\~ao dos programas.
+
+\subsection{Instalando o mono}
+Para instalar o mono é simples. Basta seguir os comando:
+
+\begin{enumerate}
+    \item sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 3FA7E0328081BFF6A14DA29AA6A19B38D3D831EF
+    \item echo "deb http://download.mono-project.com/repo/debian wheezy main" | sudo tee /etc/apt/sources.list.d/mono-xamarin.list
+    \item sudo apt-get update
+    \item sudo apt-get install mono-complete
+\end{enumerate}
+
+\section{Conjunto de instruções CLI}
+Dado que nosso objetivo é criar um compilador, é preciso entender melhor as instruçõs do CLI.
+
+\begin{enumerate}
+    \item \textbf{add}, Add two values, returning a new value.
+    \item \textbf{add.ovf}, Add signed integer values with overflow check.
+    \item \textbf{add.ovf.un}, Add unsigned integer values with overflow check.
+    \item \textbf{and}, Bitwise AND of two integral values, returns an integral value.
+\item \textbf{arglist}, Return argument list handle for the current method.
+\item \textbf{beq <int32 (target)\>}, Branch to target if equal.
+\item \textbf{beq.s <int8 (target)>}, Branch to target if equal, short form.
+\item \textbf{bge <int32 (target)>}, Branch to target if greater than or equal to.
+\item \textbf{bge.s <int8 (target)>}, Branch to target if greater than or equal to, short form.
+\item \textbf{bge.un <int32 (target)>}, Branch to target if greater than or equal to (unsigned or
+unordered).
+\item \textbf{bge.un.s <int8 (target)>}, Branch to target if greater than or equal to (unsigned or
+unordered), short form.
+\item \textbf{bgt <int32 (target)>}, Branch to target if greater than.
+\item \textbf{bgt.s <int8 (target)>}, Branch to target if greater than, short form.
+\item \textbf{bgt.un <int32 (target)>}, Branch to target if greater than (unsigned or unordered).
+\item \textbf{bgt.un.s <int8 (target)>}, Branch to target if greater than (unsigned or unordered),
+short form.
+
+\end{enumerate}
+
+\end{document}
